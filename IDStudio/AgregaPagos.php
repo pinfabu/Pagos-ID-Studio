@@ -26,10 +26,9 @@
             
             <div class="menu">  
               <a href="http://localhost:81/IDStudio/InputPagos.php"> Agregar trabajos </a> 
-              <a href="http://localhost:81/IDStudio/AgregaPagos.php"> Agregar Pagos </a> 
-              <a href="http://localhost:81/IDStudio/ConsultarLosPagos.php"> Consultar Pagos </a>
+              <a href="http://localhost:81/IDStudio/AgregaPagos.php"> Agregar Pagos </a>
+              <a href="http://localhost:81/IDStudio/ConsultarLosPagos.php"> Consultar Pagos </a> 
               <a href="http://localhost:81/IDStudio/ModificarCitas.php"> Modificar Citas </a> 
-
             </div>  
     
             <!-- Símbolo para pantallas pequeñas -->
@@ -57,10 +56,10 @@
             <div id="div-advertencia" class="notification is-danger" style="text-align:center;display:none;"></div>
             <div id="div-paso1" class="tab">
 
-                <h1 style="font-family:Raleway;text-align:center;font-weight: bold;">Selecciona la Estilista o Auxiliar a consultar</h1>
+                <h1 style="font-family:Raleway;text-align:center;font-weight: bold;">Selecciona la Estilista o auxiliar</h1>
                 <div style="text-align:center;" id="div-centrador">
                     <select name="estilistas" id="estilistasSelect" class="servicioSelect"  onmousedown="if(this.options.length>10){this.size=10;}" onchange='this.size=0;' onblur="this.size=0;" style="border-radius:5px;border-color:transparent;">
-                        <option value="default">Selecciona la Estilista o Auxiliar</option>
+                        <option value="default">Selecciona la auxiliar o estilista</option>
                             <option value="Mia">Mia</option>
                             <option value="Ely">Ely</option>
                             <option value="Arely">Arely</option>
@@ -78,6 +77,26 @@
 
                 <br>
 
+                <h1 style="font-family:Raleway;text-align:center;font-weight: bold;">Selecciona el número de días trabajados</h1>
+                <div style="text-align:center;" id="div-centrador">
+                    <input type="number" id="workdaysSelect" class="precioSelect" name="workdaysSelect" min="0" max="7" step="1" value="1" style="border-radius:15px;border-color:transparent;font-family:Raleway;font-weight: bold;padding:8px;">
+                    <br>
+                
+                    <button type="button" id="add" class="btn" onclick="addElementWorkDays(event)">Añadir</button>
+                    <div id="div-lista-workdays">
+
+                    </div>
+                </div>
+
+                <h1 style="font-family:Raleway;text-align:center;font-weight: bold;">Establece la propina y añádela</h1>            
+                <div style="text-align:center;" id="div-centrador">
+                    <input type="number" id="propinasSelect" class="precioSelect" name="propinasSelect" min="0" max="4000" step="100" value="0" style="border-radius:15px;border-color:transparent;font-family:Raleway;font-weight: bold;padding:8px;">
+                    <br>
+                    <button type="button" id="add" class="btn" onclick="addElementPropinas(event)">Añadir</button>
+                    <div id="div-lista-propinas">
+
+                    </div>
+                </div>
             </div>
                 <br>
             <div id="div-paso2" class="tab">
@@ -136,7 +155,18 @@
         </form>
          <div></div>
     </div>
-    <script src="js/funCitas4.js"> </script>
+
+    <footer>
+          <div class="container-footer">
+                <div class="redes-container">
+                    <ul> 
+                        <li><a href="https://www.facebook.com/idstudio.oficial/" class="facebook" target="blank"><i class="fab fa-facebook-f"></i></a> </li> 
+                        <li><a href="https://www.instagram.com/idstudio.oficial/" class="instagram" target="blank"><i class="fab fa-instagram"></i></a> </li> 
+                    </ul>
+                </div>
+          </div>
+    </footer>
+    <script src="js/funCitas3.js"> </script>
     <script>
         
         var today = new Date();

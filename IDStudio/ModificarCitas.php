@@ -27,9 +27,8 @@
             <div class="menu">  
               <a href="http://localhost:81/IDStudio/InputPagos.php"> Agregar trabajos </a> 
               <a href="http://localhost:81/IDStudio/AgregaPagos.php"> Agregar Pagos </a> 
-              <a href="http://localhost:81/IDStudio/ConsultarLosPagos.php"> Consultar Pagos </a>
+              <a href="http://localhost:81/IDStudio/ConsultarLosPagos.php"> Consultar los Pagos </a> 
               <a href="http://localhost:81/IDStudio/ModificarCitas.php"> Modificar Citas </a> 
-
             </div>  
     
             <!-- Símbolo para pantallas pequeñas -->
@@ -136,7 +135,7 @@
         </form>
          <div></div>
     </div>
-    <script src="js/funCitas4.js"> </script>
+    <script src="js/funCitas5.js"> </script>
     <script>
         
         var today = new Date();

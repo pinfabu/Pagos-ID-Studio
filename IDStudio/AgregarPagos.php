@@ -27,8 +27,9 @@
             
             <div class="menu">  
             <a href="http://localhost:81/IDStudio/InputPagos.php"> Agregar trabajos </a> 
-            <a href="http://localhost:81/IDStudio/ConsultaPagos.php"> Agregar Pagos </a> 
-            <a href="http://localhost:81/IDStudio/ConsultarLosPagos.php"> Consultar los Pagos </a> 
+            <a href="http://localhost:81/IDStudio/AgregaPagos.php"> Agregar Pagos </a> 
+            <a href="http://localhost:81/IDStudio/ConsultarLosPagos.php"> Consultar Pagos </a> 
+            <a href="http://localhost:81/IDStudio/ModificarCitas.php"> Modificar citas </a> 
             </div>  
     
             
@@ -121,15 +122,6 @@
 
     ?>
 </div>
-        <footer>
-          <div class="container-footer">
-                <div class="redes-container">
-                    <ul> 
-                        <li><a href="https://www.facebook.com/idstudio.oficial/" class="facebook" target="blank"><i class="fab fa-facebook-f"></i></a> </li> 
-                        <li><a href="https://www.instagram.com/idstudio.oficial/" class="instagram" target="blank"><i class="fab fa-instagram"></i></a> </li> 
-                    </ul>
-                </div>
-          </div>
-        </footer>
+
     </body>
 </html>

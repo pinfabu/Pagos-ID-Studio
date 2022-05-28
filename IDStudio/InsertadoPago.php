@@ -27,8 +27,9 @@
             
             <div class="menu">  
             <a href="http://localhost:81/IDStudio/InputPagos.php"> Agregar trabajos </a> 
-              <a href="http://localhost:81/IDStudio/ConsultaPagos.php"> Agregar Pagos </a> 
-              <a href="http://localhost:81/IDStudio/ConsultarLosPagos.php"> Consultar los Pagos </a> 
+              <a href="http://localhost:81/IDStudio/AgregaPagos.php"> Agregar Pagos </a> 
+              <a href="http://localhost:81/IDStudio/ConsultarLosPagos.php"> Consultar Pagos </a> 
+              <a href="http://localhost:81/IDStudio/ModificarCitas.php"> Modificar citas </a> 
             </div>  
     
             
@@ -59,6 +60,8 @@
         $fechaI=$_GET['fechaI'];
         $fechaF=$_GET['fechaF'];
         $trabajadora=$_GET['trabajadora'];
+        $propina=$_GET['propinas'];
+        $propinas=explode("-",$propina);
 
         if($trabajadora=="estilista"){
             $resultEstilista=mysqli_query($conexion,"select ID_Estilista from Estilista where Nombre_Completo=\"$estilista\" ;");//obtenemos id
@@ -81,12 +84,15 @@
                 echo "".$ComisionesTotales[$i].", ";
                 $Total_Comisiones+=$ComisionesTotales[$i];
             }
+            
             echo "<br>Total de comisiones a pagar: $".$Total_Comisiones;
             echo "<br>Pago semanal a pagar: $".$Pago_semanal;
-            $Pago_total=$Total_Comisiones+$Pago_semanal;
+            echo "<br>Propinas a pagar: $".$propinas[0];
+            $Pago_total=$Total_Comisiones+$Pago_semanal+$propinas[0];
             echo "<br><br><h4>Pago total a pagar: $".$Pago_total."</h4>";
             echo "<h4>Correspondiente a la semana del día: ".$fechaI." al día ".$fechaF."</h4>";
-            mysqli_query($conexion,"insert into Pagos values(null,$ID_Estilista,null,'Semana de: $fechaI a $fechaF',$Total_Comisiones,$Pago_semanal,$Pago_total,\"$fechaI\",\"$fechaF\");");//INSERT en servicio_cita
+            //echo "Propina: ;".$propinas[0];        
+            mysqli_query($conexion,"insert into Pagos values(null,$ID_Estilista,null,'Semana de: $fechaI a $fechaF',$Total_Comisiones,$Pago_semanal,$Pago_total,\"$fechaI\",\"$fechaF\",\"$propinas[0]\");");//INSERT en servicio_cita
             $resultID_Pago=mysqli_query($conexion,"select ID_Pago from Pagos where ID_Estilista=\"$ID_Estilista\" and Primer_dia_semana='$fechaI' and Ultimo_dia_semana='$fechaF';");//obtenemos id
             $rowID_Pago=mysqli_fetch_assoc($resultID_Pago);
             $ID_Pago=$rowID_Pago["ID_Pago"];
@@ -130,10 +136,11 @@
             }
             echo "<br>Total de comisiones a pagar: $".$Total_Comisiones;
             echo "<br>Pago semanal a pagar: $".$Pago_semanal;
-            $Pago_total=$Total_Comisiones+$Pago_semanal;
+            echo "<br>Propinas a pagar: $".$propinas[0];
+            $Pago_total=$Total_Comisiones+$Pago_semanal+$propinas[0];
             echo "<br><br><h4>Pago total a pagar: $".$Pago_total."</h4>";
             echo "<h4>Correspondiente a la semana del día: ".$fechaI." al día ".$fechaF."</h4>";
-            mysqli_query($conexion,"insert into Pagos values(null,null,$ID_Auxiliar,'Semana de: $fechaI a $fechaF',$Total_Comisiones,$Pago_semanal,$Pago_total,\"$fechaI\",\"$fechaF\");");//INSERT en servicio_cita
+            mysqli_query($conexion,"insert into Pagos values(null,null,$ID_Auxiliar,'Semana de: $fechaI a $fechaF',$Total_Comisiones,$Pago_semanal,$Pago_total,\"$fechaI\",\"$fechaF\",\"$propinas[0]\");");//INSERT en servicio_cita
             $resultID_Pago=mysqli_query($conexion,"select ID_Pago from Pagos where ID_Auxiliar=\"$ID_Auxiliar\" and Primer_dia_semana='$fechaI' and Ultimo_dia_semana='$fechaF';");//obtenemos id
             $rowID_Pago=mysqli_fetch_assoc($resultID_Pago);
             $ID_Pago=$rowID_Pago["ID_Pago"];
@@ -156,15 +163,5 @@
 
     ?>
 </div>
-        <footer>
-          <div class="container-footer">
-                <div class="redes-container">
-                    <ul> 
-                        <li><a href="https://www.facebook.com/idstudio.oficial/" class="facebook" target="blank"><i class="fab fa-facebook-f"></i></a> </li> 
-                        <li><a href="https://www.instagram.com/idstudio.oficial/" class="instagram" target="blank"><i class="fab fa-instagram"></i></a> </li> 
-                    </ul>
-                </div>
-          </div>
-        </footer>
     </body>
 </html>

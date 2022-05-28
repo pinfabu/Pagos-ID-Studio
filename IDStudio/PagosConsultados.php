@@ -26,9 +26,9 @@
             
             <div class="menu">  
             <a href="http://localhost:81/IDStudio/InputPagos.php"> Agregar trabajos </a> 
-              <a href="http://localhost:81/IDStudio/ConsultaPagos.php"> Agregar Pagos </a> 
-              <a href="http://localhost:81/IDStudio/ConsultarLosPagos.php"> Consultar los Pagos </a> 
-              <a href="http://localhost:81/IDStudio/ConsultarLosPagos.php"> Modificar Citas </a> 
+              <a href="http://localhost:81/IDStudio/AgregaPagos.php"> Agregar Pagos </a> 
+              <a href="http://localhost:81/IDStudio/ConsultarLosPagos.php"> Consultar Pagos </a> 
+              <a href="http://localhost:81/IDStudio/ModificarCitas.php"> Modificar Citas </a> 
             </div>  
     
             
@@ -63,8 +63,8 @@
             $resultEstilista=mysqli_query($conexion,"select ID_Estilista from Estilista where Nombre_Completo=\"$estilista\" ;");//obtenemos id
             $rowEstilista=mysqli_fetch_assoc($resultEstilista);
             $ID_Estilista=$rowEstilista["ID_Estilista"];
-            echo "<h4> Estilista: ".$estilista."</h4>";
-            echo "<h4> Trabajos realizados: </h4>";
+            echo "<h4> Estilista: ".$estilista."</h4><br>";
+            echo "<h4>Comisiones a pagar: </h4>";
             $ID_Cita=array();
             $Trabajo=array();
             $Precio=array();
@@ -83,34 +83,37 @@
                 echo "<script>console.log('0 resultados')</script>";
             }
             for($i=0;$i<sizeof($Trabajo);$i++){
-                echo "<br>Trabajo: ".$Trabajo[$i];
-                echo "<br>Precio: $".$Precio[$i];
-                echo "<br>Comision: $".$Comision[$i];
-                echo "<br>Fecha: ".$Fecha[$i];
-                echo "<br>ID_Cita: ".$ID_Cita[$i]."<br>";
+                echo " ".$Trabajo[$i];
+                //echo "-> $".$Precio[$i];
+                echo ": $".$Comision[$i].",";
+                echo " del día: ".$Fecha[$i]."<br><br>";
+                //echo "<br>ID_Cita: ".$ID_Cita[$i]."<br>";
 
             }
             $Semana_a_pagar=array();
             $Total_Comisiones=array();
             $Pago_Semanal=array();
             $Pago_Total=array();
-            $resultPago=mysqli_query($conexion,"select Semana_a_pagar,Total_Comisiones,Pago_Semanal,Pago_Total from Pagos where ID_Estilista=\"$ID_Estilista\" and Primer_dia_semana='$fechaI' and Ultimo_dia_semana='$fechaF';");//obtenemos id
+            $propinas=array();
+            $resultPago=mysqli_query($conexion,"select Semana_a_pagar,Total_Comisiones,Pago_Semanal,Pago_Total,propinas from Pagos where ID_Estilista=\"$ID_Estilista\" and Primer_dia_semana='$fechaI' and Ultimo_dia_semana='$fechaF';");//obtenemos id
             if(mysqli_num_rows($resultPago)>0){
                 while($rowCita=mysqli_fetch_assoc($resultPago)){
                     array_push($Semana_a_pagar,$rowCita["Semana_a_pagar"]);
                     array_push($Total_Comisiones,$rowCita["Total_Comisiones"]);
                     array_push($Pago_Semanal,$rowCita["Pago_Semanal"]);
                     array_push($Pago_Total,$rowCita["Pago_Total"]);
+                    array_push($propinas,$rowCita["propinas"]);
                 }
             }else{  
                 echo "<script>console.log('0 resultados')</script>";
             }
-            echo "<br><h4> Pagos totales: </h4>";
+            echo "<h4> Pagos totales: </h4>";
             for($i=0;$i<sizeof($Semana_a_pagar);$i++){
-                echo "<br>".$Semana_a_pagar[$i];
+                echo "".$Semana_a_pagar[$i];
                 echo "<br>Total Comisiones: $".$Total_Comisiones[$i];
                 echo "<br>Pago Semanal: $".$Pago_Semanal[$i];
-                echo "<br>Pago Total: $".$Pago_Total[$i]."<br>";
+                echo "<br>Propinas: $".$propinas[$i]."<br><br>";
+                echo "<h4>Pago Total: $".$Pago_Total[$i]."<br></h4>";
             }
         }
         else{
@@ -118,7 +121,7 @@
             $rowAuxiliar=mysqli_fetch_assoc($resultAuxiliar);
             $ID_Auxiliar=$rowAuxiliar["ID_Auxiliar"];
             echo "<h4> Auxiliar: ".$estilista."</h4>";
-            echo "<h4> Trabajos realizados: </h4>";
+            echo "<h4>Comisiones a pagar: </h4>";
             $ID_Cita=array();
             $Trabajo=array();
             $Precio=array();
@@ -137,23 +140,25 @@
                 echo "<script>console.log('0 resultados')</script>";
             }
             for($i=0;$i<sizeof($Trabajo);$i++){
-                echo "<br>Trabajo: ".$Trabajo[$i];
-                echo "<br>Precio: $".$Precio[$i];
-                echo "<br>Comision: $".$Comision[$i];
-                echo "<br>Fecha: ".$Fecha[$i];
-                echo "<br>ID_Cita: ".$ID_Cita[$i]."<br>";
+                echo " ".$Trabajo[$i];
+                //echo "-> $".$Precio[$i];
+                echo ": $".$Comision[$i].",";
+                echo " del día: ".$Fecha[$i]."<br><br>";
+                //echo "<br>ID_Cita: ".$ID_Cita[$i]."<br>";
             }
             $Semana_a_pagar=array();
             $Total_Comisiones=array();
             $Pago_Semanal=array();
             $Pago_Total=array();
-            $resultPago=mysqli_query($conexion,"select Semana_a_pagar,Total_Comisiones,Pago_Semanal,Pago_Total from Pagos where ID_Auxiliar=\"$ID_Auxiliar\" and Primer_dia_semana='$fechaI' and Ultimo_dia_semana='$fechaF';");//obtenemos id
+            $propinas=array();
+            $resultPago=mysqli_query($conexion,"select Semana_a_pagar,Total_Comisiones,Pago_Semanal,Pago_Total,propinas from Pagos where ID_Auxiliar=\"$ID_Auxiliar\" and Primer_dia_semana='$fechaI' and Ultimo_dia_semana='$fechaF';");//obtenemos id
             if(mysqli_num_rows($resultPago)>0){
                 while($rowCita=mysqli_fetch_assoc($resultPago)){
                     array_push($Semana_a_pagar,$rowCita["Semana_a_pagar"]);
                     array_push($Total_Comisiones,$rowCita["Total_Comisiones"]);
                     array_push($Pago_Semanal,$rowCita["Pago_Semanal"]);
                     array_push($Pago_Total,$rowCita["Pago_Total"]);
+                    array_push($propinas,$rowCita["propinas"]);
                 }
             }else{  
                 echo "<script>console.log('0 resultados')</script>";
@@ -163,7 +168,8 @@
                 echo "<br>".$Semana_a_pagar[$i];
                 echo "<br>Total Comisiones: $".$Total_Comisiones[$i];
                 echo "<br>Pago Semanal: $".$Pago_Semanal[$i];
-                echo "<br>Pago Total: $".$Pago_Total[$i]."<br>";
+                echo "<br>Propinas: $".$propinas[$i]."<br><br>";
+                echo "<h4>Pago Total: $".$Pago_Total[$i]."<br></h4>";
             }
         }
 
@@ -404,16 +410,6 @@
          <div></div>
     </div>
 
-    <footer>
-          <div class="container-footer">
-                <div class="redes-container">
-                    <ul> 
-                        <li><a href="https://www.facebook.com/idstudio.oficial/" class="facebook" target="blank"><i class="fab fa-facebook-f"></i></a> </li> 
-                        <li><a href="https://www.instagram.com/idstudio.oficial/" class="instagram" target="blank"><i class="fab fa-instagram"></i></a> </li> 
-                    </ul>
-                </div>
-          </div>
-    </footer>
     <script src="http://localhost:81/IDStudio/js/funCitas5.js"> </script>
     <script>
         
