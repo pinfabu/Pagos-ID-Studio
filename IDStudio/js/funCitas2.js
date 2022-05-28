@@ -68,16 +68,16 @@ function addElementServicios(){
 }
 
 function addElementPrecios(){
-  const select=document.getElementById("precioSelect");
+  const input=document.getElementById("precioSelect");
   var lista=document.getElementById("div-lista-precios");
 
-  var seleccionTxt=select.options[select.selectedIndex].text;//contiene lo que dice en la opcion txt
-  var seleccionVal=select.options[select.selectedIndex].value;//contiene el val
+  var seleccionTxt=input.text;//contiene lo que dice en la opcion txt
+  var seleccionVal=input.value;//contiene el val
   //alert(seleccionTxt*2);
   if(seleccionVal!="default"){
       console.log(seleccionTxt);
       var nuevoElemento = `<div></div>
-      <div class="notification is-success">`+seleccionTxt+`</div>
+      <div class="notification is-success">`+seleccionVal+`</div>
       <p class="delete-btn" onclick="removeElement(event)">-</p>`;
       lista.innerHTML+=(nuevoElemento);
   }else{
@@ -183,24 +183,40 @@ function Estilista_o_Auxiliar(){
 function calcularComisiones(){
   const listaEstilista=document.getElementById("div-lista-estilistas")
   const lista=document.getElementById("div-lista-precios");
+  const listaServicios=document.getElementById("div-lista-servicios");
+
+  var servicos="";
   var estilistas="";
   var comision="";
+  for(var i=0;i<listaServicios.childElementCount;i++){
+    if(listaServicios.children[i].innerHTML!="" && listaServicios.children[i].innerHTML!="-")
+    servicos+=listaServicios.children[i].innerHTML+"-";
+  }
+  
   for(var i=0;i<listaEstilista.childElementCount;i++){
     if(listaEstilista.children[i].innerHTML!="" && listaEstilista.children[i].innerHTML!="-")
     estilistas+=listaEstilista.children[i].innerHTML+"-";
   }
   if(estilistas=="Mia-"){
-    //alert("Es Mia");
+
     for(var i=0;i<lista.childElementCount;i++){
-      if(lista.children[i].innerHTML!="" && lista.children[i].innerHTML!="-")
-      comision+=lista.children[i].innerHTML*.25+"-";
+      if(lista.children[i].innerHTML!="" && lista.children[i].innerHTML!="-" && listaServicios.children[i].innerHTML!="" && listaServicios.children[i].innerHTML=="Avyna" && listaServicios.children[i].innerHTML!="-"){
+        comision+=lista.children[i].innerHTML*.1+"-";
+      }
+      else if(lista.children[i].innerHTML!="" && lista.children[i].innerHTML!="-") {
+        comision+=lista.children[i].innerHTML*.25+"-";
+      }
     }
   }
   else{
     //alert("No es Mia");
     for(var i=0;i<lista.childElementCount;i++){
-      if(lista.children[i].innerHTML!="" && lista.children[i].innerHTML!="-")
-      comision+=lista.children[i].innerHTML*.2+"-";
+      if(lista.children[i].innerHTML!="" && lista.children[i].innerHTML!="-" && listaServicios.children[i].innerHTML!="" && listaServicios.children[i].innerHTML=="Avyna" && listaServicios.children[i].innerHTML!="-"){
+        comision+=lista.children[i].innerHTML*.1+"-";
+      }
+      else if(lista.children[i].innerHTML!="" && lista.children[i].innerHTML!="-") {
+        comision+=lista.children[i].innerHTML*.2+"-";
+      }
     }
   }
   return comision;

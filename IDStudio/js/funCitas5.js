@@ -183,7 +183,7 @@ function Estilista_o_Auxiliar(){
       if(lista.children[i].innerHTML!="" && lista.children[i].innerHTML!="-")
       Trabajadoras+=lista.children[i].innerHTML+"-";
     }
-    if(Trabajadoras=="Mia-" || Trabajadoras=="Ely-" || Trabajadoras=="Arely-"){
+    if(Trabajadoras=="Mia-" || Trabajadoras=="Ely-" || Trabajadoras=="Arely-" || Trabajadoras=="Yarleth-"){
       TipoDeTrabajadora="estilista";
       return TipoDeTrabajadora;
     }

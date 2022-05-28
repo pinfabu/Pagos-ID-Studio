@@ -57,20 +57,19 @@ function addElementEstilistas(){
   }
 
 function addElementWorkDays(){
-    const select=document.getElementById("workdaysSelect");
+    const input=document.getElementById("workdaysSelect");
     var lista=document.getElementById("div-lista-workdays");
   
-    var seleccionTxt=select.options[select.selectedIndex].text;//contiene lo que dice en la opcion txt
-    var seleccionVal=select.options[select.selectedIndex].value;//contiene el val
-    
+    var seleccionTxt=input.text;//contiene lo que dice en la opcion txt
+    var seleccionVal=input.value;//contiene el val
     if(seleccionVal!="default"){
         console.log(seleccionTxt);
         var nuevoElemento = `<div></div>
-        <div class="notification is-success">`+seleccionTxt+`</div>
+        <div class="notification is-success">`+seleccionVal+`</div>
         <p class="delete-btn" onclick="removeElement(event)">-</p>`;
         lista.innerHTML+=(nuevoElemento);
     }else{
-        alert("Añade una Día válido");
+        alert("Añade un día válido");
     }
 }
 
@@ -106,6 +105,34 @@ function addElementFechaFinal(){
       }else{
           alert("Añade una fecha válida");
       }
+}
+
+function addElementPropinas(){
+  const input=document.getElementById("propinasSelect");
+  var lista=document.getElementById("div-lista-propinas");
+
+  var seleccionTxt=input.text;//contiene lo que dice en la opcion txt
+  var seleccionVal=input.value;//contiene el val
+  if(seleccionVal!="default"){
+      console.log(seleccionTxt);
+      var nuevoElemento = `<div></div>
+      <div class="notification is-success">`+seleccionVal+`</div>
+      <p class="delete-btn" onclick="removeElement(event)">-</p>`;
+      lista.innerHTML+=(nuevoElemento);
+  }else{
+      alert("Añade una propina válida");
+  }
+}
+
+function obtenerPropinas(){
+  const lista=document.getElementById("div-lista-propinas");
+  
+  var propinas="";
+  for(var i=0;i<lista.childElementCount;i++){
+    if(lista.children[i].innerHTML!="" && lista.children[i].innerHTML!="-")
+    propinas+=lista.children[i].innerHTML+"-";
+  }
+  return propinas;
 }
 
 function obtenerEstilistas(){
@@ -179,8 +206,8 @@ function siguienteAnterior(n){
     currenttab = currenttab + n;
     if (currenttab >= x.length) {
       //...the form gets submitted:
-      window.location="./InsertadoPago.php/?estilistas="+obtenerEstilistas()+"&workdays="+obtenerWorkDays()+"&fechaI="+obtenerFechaInicial()+"&fechaF="+obtenerFechaFinal()+"&trabajadora="+Estilista_o_Auxiliar();
-      //window.location="./ConsultaPagos.php/?estilistas="+obtenerEstilistas()+"&workdays="+obtenerWorkDays()+"&fechaI="+obtenerFechaInicial()+"&fechaF="+obtenerFechaFinal()+"&trabajadora="+Estilista_o_Auxiliar();
+      window.location="./InsertadoPago.php/?estilistas="+obtenerEstilistas()+"&workdays="+obtenerWorkDays()+"&fechaI="+obtenerFechaInicial()+"&fechaF="+obtenerFechaFinal()+"&trabajadora="+Estilista_o_Auxiliar()+"&propinas="+obtenerPropinas();
+      //window.location="./AgregaPagos.php/?estilistas="+obtenerEstilistas()+"&workdays="+obtenerWorkDays()+"&fechaI="+obtenerFechaInicial()+"&fechaF="+obtenerFechaFinal()+"&trabajadora="+Estilista_o_Auxiliar();
       return false;
     }
     // Otherwise, display the correct tab:
