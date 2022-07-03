@@ -107,6 +107,7 @@
                         <optgroup label="Tintes">
                             <option value="tinte">Tinte</option>
                             <option value="retoquetinte">Retoque Tinte</option>
+                            <option value="volumen">Volumen</option>
                         </optgroup>
                         <optgroup label="Peinado y maquillaje">
                             <option value="peinadoymaquillaje">Peinado y maquillaje</option>
@@ -146,7 +147,7 @@
 
                 <h1 style="font-family:Raleway;text-align:center;font-weight: bold;">Establece el precio y añádelo</h1>            
                 <div style="text-align:center;" id="div-centrador">
-                    <input type="number" id="precioSelect" class="precioSelect" name="precioSelect" min="0" max="4000" step="100" value="1000" style="border-radius:15px;border-color:transparent;font-family:Raleway;font-weight: bold;padding:8px;">
+                    <input type="number" id="precioSelect" class="precioSelect" name="precioSelect" min="0" max="6000" step="100" value="1000" style="border-radius:15px;border-color:transparent;font-family:Raleway;font-weight: bold;padding:8px;">
                     <br>
                     <button type="button" id="add" class="btn" onclick="addElementPrecios(event)">Añadir</button>
                     <div id="div-lista-precios">
